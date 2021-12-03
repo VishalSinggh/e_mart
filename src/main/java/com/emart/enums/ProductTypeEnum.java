@@ -1,7 +1,7 @@
 package com.emart.enums;
 
 public enum ProductTypeEnum {
-	APPAREL("A"), COSMETICS("C"), ELECTRONICS("E"), FOODANDDRINKS("F");
+	APPAREL("APPAREL"), COSMETICS("COSMETICS"), ELECTRONICS("ELECTRONICS"), FOODANDDRINKS("FOODANDDRINKS");
 	
 	private String source;
 	

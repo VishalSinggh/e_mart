@@ -22,4 +22,6 @@ public class Apparel {
 	private String name;
 	
 	private int price;
+	
+	private int returnTimePeriod;
 }

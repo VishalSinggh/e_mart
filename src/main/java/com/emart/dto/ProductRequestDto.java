@@ -1,5 +1,7 @@
 package com.emart.dto;
 
+import java.util.Date;
+
 import com.emart.enums.ProductTypeEnum;
 
 import lombok.AllArgsConstructor;
@@ -11,9 +13,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductRequestDto {
 
-	private ProductTypeEnum productTypeEnum; 
+	private String productType; 
 	
 	private String name;
 	
 	private int price;
+	
+	private int returnTimePeriod;
+
+	private Date expiry;
+
+	private int warranty;
+
+	private double rating;
+
 }

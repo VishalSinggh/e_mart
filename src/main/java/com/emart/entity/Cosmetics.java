@@ -1,5 +1,7 @@
 package com.emart.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,4 +24,6 @@ public class Cosmetics {
 	private String name;
 	
 	private int price;
+	
+	private Date expiry;
 }

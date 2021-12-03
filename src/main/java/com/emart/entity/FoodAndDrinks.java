@@ -22,4 +22,6 @@ public class FoodAndDrinks {
 	private String name;
 	
 	private int price;
+	
+	private double rating;
 }
