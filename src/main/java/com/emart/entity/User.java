@@ -17,17 +17,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Electronics {
-
+public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long electronicsId;
+	private long userId;
 	
 	private String name;
 	
-	private int price;
-	
-	private int warranty;
+	private long mobileNo;
 	
 //	@OneToMany(cascade = CascadeType.ALL)
 //	private List<UserPurchase> userPurchases;

@@ -1,13 +1,10 @@
 package com.emart.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,18 +14,24 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Electronics {
+public class UserPurchase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long electronicsId;
+	private int purchaseId;
 	
-	private String name;
+	@ManyToOne
+	private User user;
 	
-	private int price;
+	@ManyToOne
+	private Apparel apparel;
 	
-	private int warranty;
+	@ManyToOne
+	private Cosmetics cosmetics;
 	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	private List<UserPurchase> userPurchases;
+	@ManyToOne
+	private Electronics electronics;
+	
+	@ManyToOne
+	private FoodAndDrinks foodAndDrinks;
 }

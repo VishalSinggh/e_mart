@@ -1,9 +1,14 @@
 package com.emart.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +29,7 @@ public class Apparel {
 	private int price;
 	
 	private int returnTimePeriod;
+	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<UserPurchase> userPurchases;
 }

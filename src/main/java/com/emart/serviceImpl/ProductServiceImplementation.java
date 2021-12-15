@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 
 import com.emart.dto.GetAllProductDto;
 import com.emart.dto.ProductRequestDto;
+import com.emart.dto.UserPurchaseDto;
 import com.emart.entity.Apparel;
 import com.emart.entity.Cosmetics;
 import com.emart.entity.Electronics;
 import com.emart.entity.FoodAndDrinks;
+import com.emart.entity.User;
+import com.emart.entity.UserPurchase;
 import com.emart.repository.ApparelRepository;
 import com.emart.repository.CosmeticsRepository;
 import com.emart.repository.ElectronicsRepository;
 import com.emart.repository.FoodAndDrinksRepository;
+import com.emart.repository.UserPurchaseRepository;
+import com.emart.repository.UserRepository;
 import com.emart.service.ProductService;
 
 @Service
@@ -31,6 +36,12 @@ public class ProductServiceImplementation implements ProductService{
 	
 	@Autowired
 	private CosmeticsRepository cosmeticsRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private UserPurchaseRepository userPurchaseRepository;
 	
 	@Override
 	public String saveProduct(ProductRequestDto requestDto) {
@@ -56,7 +67,7 @@ public class ProductServiceImplementation implements ProductService{
 			foodAndDrinksRepository.save(foodAndDrinks);
 			return "saved";
 		}
-		else if(requestDto.getProductType().equalsIgnoreCase("FoodAndDrinks")) {
+		else if(requestDto.getProductType().equalsIgnoreCase("Apparel")) {
 			Apparel apparel = new Apparel();
 			BeanUtils.copyProperties(requestDto, apparel);
 			apparelRepository.save(apparel);
@@ -91,4 +102,26 @@ public class ProductServiceImplementation implements ProductService{
 		}
 	return ResponseEntity.ok("enter a valid productType");
 }
+
+	@Override
+	public ResponseEntity<?> buyProducts(long userId, UserPurchaseDto userPurchaseDto) {
+		User user = userRepository.findById(userId);
+		if(user == null) {
+			return ResponseEntity.ok("enter a valid userId");
+		}
+		Apparel apparel = apparelRepository.findById(userPurchaseDto.getApparelId());
+		Cosmetics cosmetics = cosmeticsRepository.findById(userPurchaseDto.getCosmeticsId());
+		Electronics electronics = electronicsRepository.findById(userPurchaseDto.getElectronicsId());
+		FoodAndDrinks foodAndDrinks = foodAndDrinksRepository.findById(userPurchaseDto.getFoodAndDrinksId());
+		UserPurchase userPurchase = new UserPurchase();
+		userPurchase.setApparel(apparel);
+		userPurchase.setCosmetics(cosmetics);
+		userPurchase.setElectronics(electronics);
+		userPurchase.setFoodAndDrinks(foodAndDrinks);
+		userPurchase.setUser(user);
+		
+		//BeanUtils.copyProperties(userPurchaseDto, userPurchase);
+		userPurchaseRepository.save(userPurchase);
+		return  ResponseEntity.ok("purchased");
+	}
 }
